@@ -844,8 +844,10 @@ class LeggedRobot(BaseTask):
         """ Creates simulation, terrain and evironments
         """
         self.up_axis_idx = 2 # 2 for z, 1 for y -> adapt gravity accordingly
-        if self.cfg.depth.use_camera:
-            self.graphics_device_id = self.sim_device_id # required in headless mode
+        if self.headless:
+            self.graphics_device_id = -1
+        elif self.cfg.depth.use_camera:
+            self.graphics_device_id = self.sim_device_id
         self.sim = self.gym.create_sim(self.sim_device_id, self.graphics_device_id, self.physics_engine, self.sim_params)
         mesh_type = self.cfg.terrain.mesh_type
         if mesh_type in ['heightfield', 'trimesh']:
