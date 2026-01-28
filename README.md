@@ -163,6 +163,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:your path/anaconda3/envs/<your_env_name>
 #### 3.3. 运行训练程序
 ```bash
 python train.py --task=tita_constraint 
+python simple_play.py --task=tita_constraint --sim_device cpu --pipeline cpu --rl_device cpu
+python simple_play.py --task=tita_constraint --sim_device cpu --pipeline False --rl_device cpu
+python simple_play.py --task=tita_constraint --sim_device cpu --rl_device cpu
 ```
 显存不够会非常卡，看到如下图片，表示程序正常执行，ctrl+c退出
 
