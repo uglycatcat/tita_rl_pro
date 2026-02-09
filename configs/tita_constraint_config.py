@@ -32,7 +32,7 @@ from configs.legged_robot_config import LeggedRobotCfg, LeggedRobotCfgPPO
 from global_config import ROOT_DIR
 class TitaConstraintRoughCfg( LeggedRobotCfg ):
     class env(LeggedRobotCfg.env):
-        num_envs = 16384
+        num_envs = 4096
 
         n_scan = 187
         n_priv_latent =  4 + 1 + 8 + 8 + 8 + 6 + 1 + 2 + 1 - 3
@@ -205,8 +205,8 @@ class TitaConstraintRoughCfgPPO( LeggedRobotCfgPPO ):
         entropy_coef = 0.01
         learning_rate = 1.e-3
         max_grad_norm = 0.01
-        num_learning_epochs = 6  # 从 5 增加到 6，更充分利用收集的数据
-        num_mini_batches = 3  # 从 4 减少到 3，在显存限制内增大 batch size
+        num_learning_epochs = 5  
+        num_mini_batches = 4  # mini batch size = num_envs*nsteps / nminibatches
         cost_value_loss_coef = 0.1
         cost_viol_loss_coef = 0.1
 
@@ -237,7 +237,7 @@ class TitaConstraintRoughCfgPPO( LeggedRobotCfgPPO ):
         runner_class_name = 'OnConstraintPolicyRunner'
         algorithm_class_name = 'NP3O'
         max_iterations = 10000
-        num_steps_per_env = 32  # 从 24 增加到 32，在显存限制内最大化数据收集
+        num_steps_per_env = 24 
         resume = True
         resume_path = 'tita_example_10000.pt'
 
