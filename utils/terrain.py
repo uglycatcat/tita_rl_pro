@@ -115,11 +115,13 @@ class Terrain:
         # else:
         #     pit_terrain(terrain, depth=pit_depth, platform_size=4.)
 
-        if choice < 0.5:
-            step_height *= -1
-        terrain_utils.pyramid_stairs_terrain(terrain, step_width=0.61, step_height=0.5 * step_height,
-                                                    platform_size=3.)
-
+        # if choice < 0.5:
+        #     step_height *= -1
+        # terrain_utils.pyramid_stairs_terrain(terrain, step_width=0.61, step_height=0.5 * step_height,
+        #                                             platform_size=3.)
+        wave_amplitude = 0.05 + 0.15 * difficulty
+        wave_length = 1.0 + 0.5 * (1.0 - difficulty)
+        sinusoidal_terrain(terrain, amplitude=wave_amplitude, wavelength=wave_length)
         return terrain
 
     def add_terrain_to_map(self, terrain, row, col):
@@ -169,3 +171,9 @@ def pit_terrain(terrain, depth, platform_size=1.):
 
 
 
+def sinusoidal_terrain(terrain, amplitude, wavelength):
+    x = np.arange(terrain.length) * terrain.horizontal_scale
+    y = np.arange(terrain.width) * terrain.horizontal_scale
+    xx, yy = np.meshgrid(x, y, indexing="ij")
+    height = amplitude * (np.sin(2.0 * np.pi * xx / wavelength) + np.cos(2.0 * np.pi * yy / wavelength))
+    terrain.height_field_raw[:, :] = (height / terrain.vertical_scale).astype(np.int16)
