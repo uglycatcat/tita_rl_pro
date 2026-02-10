@@ -119,10 +119,16 @@ class Terrain:
         #     step_height *= -1
         # terrain_utils.pyramid_stairs_terrain(terrain, step_width=0.61, step_height=0.5 * step_height,
         #                                             platform_size=3.)
-        wave_amplitude = 0.05 + 0.15 * difficulty
-        wave_length = 1.0 + 0.5 * (1.0 - difficulty)
-        sinusoidal_terrain(terrain, amplitude=wave_amplitude, wavelength=wave_length)
-        return terrain
+        # Keep curriculum progression, but use gentler waves so early training remains stable.
+        wave_amplitude = 0.015 + 0.035 * difficulty
+        wave_length = 3.2 + 1.3 * (1.0 - difficulty)
+        sinusoidal_terrain(
+            terrain,
+            amplitude=wave_amplitude,
+            wavelength=wave_length,
+            secondary_scale=0.25,
+            smooth_passes=2,
+        )
 
     def add_terrain_to_map(self, terrain, row, col):
         i = row
@@ -171,9 +177,23 @@ def pit_terrain(terrain, depth, platform_size=1.):
 
 
 
-def sinusoidal_terrain(terrain, amplitude, wavelength):
+def sinusoidal_terrain(terrain, amplitude, wavelength, secondary_scale=0.25, smooth_passes=0):
     x = np.arange(terrain.length) * terrain.horizontal_scale
     y = np.arange(terrain.width) * terrain.horizontal_scale
     xx, yy = np.meshgrid(x, y, indexing="ij")
-    height = amplitude * (np.sin(2.0 * np.pi * xx / wavelength) + np.cos(2.0 * np.pi * yy / wavelength))
+
+    # Main long-wave undulation + weak secondary wave for variation without sharp pits.
+    primary_wave = np.sin(2.0 * np.pi * (xx + 0.35 * yy) / wavelength)
+    secondary_wave = np.sin(2.0 * np.pi * (0.55 * xx - 0.15 * yy) / (1.8 * wavelength))
+    height = amplitude * (primary_wave + secondary_scale * secondary_wave)
+
+    # Light box smoothing removes isolated depressions caused by discretization to heightfield ints.
+    for _ in range(max(0, int(smooth_passes))):
+        padded = np.pad(height, ((1, 1), (1, 1)), mode="edge")
+        height = (
+            padded[:-2, :-2] + padded[:-2, 1:-1] + padded[:-2, 2:] +
+            padded[1:-1, :-2] + padded[1:-1, 1:-1] + padded[1:-1, 2:] +
+            padded[2:, :-2] + padded[2:, 1:-1] + padded[2:, 2:]
+        ) / 9.0
+
     terrain.height_field_raw[:, :] = (height / terrain.vertical_scale).astype(np.int16)
