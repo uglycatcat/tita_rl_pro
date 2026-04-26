@@ -6,6 +6,7 @@ logs/
 *.json
 *.engine
 *.onnx
+*.log
 .vscode/
 configs/__pycache__/
 runner/__pycache__/
