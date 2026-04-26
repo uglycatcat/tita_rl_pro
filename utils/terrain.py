@@ -14,6 +14,13 @@ class Terrain:
             return
         self.env_length = cfg.terrain_length
         self.env_width = cfg.terrain_width
+        # Optional terrain switch:
+        # - "stairs": only pyramid stairs
+        # - "wave": only sinusoidal waves
+        # - "mixed": keep proportion-based mix (default)
+        self.terrain_mode = getattr(cfg, "terrain_mode", "wave")
+        if self.terrain_mode not in ("stairs", "wave", "mixed"):
+            self.terrain_mode = "wave"
         self.proportions = [np.sum(cfg.terrain_proportions[:i+1]) for i in range(len(cfg.terrain_proportions))]
 
         self.cfg.num_sub_terrains = cfg.num_rows * cfg.num_cols
@@ -115,10 +122,32 @@ class Terrain:
         # else:
         #     pit_terrain(terrain, depth=pit_depth, platform_size=4.)
 
-        if choice < 0.5:
-            step_height *= -1
-        terrain_utils.pyramid_stairs_terrain(terrain, step_width=0.61, step_height=0.5 * step_height,
-                                                    platform_size=3.)
+        if self.terrain_mode == "stairs":
+            if choice < 0.5:
+                step_height *= -1
+            terrain_utils.pyramid_stairs_terrain(
+                terrain,
+                step_width=0.61,
+                step_height=0.5 * step_height,
+                platform_size=3.
+            )
+        elif self.terrain_mode == "wave":
+            wave_terrain(terrain, difficulty)
+        else:
+            # Keep stairs as the default terrain and reserve the tail portion
+            # for undulating waves so existing training flow is unchanged.
+            wave_start = self.proportions[-2] if len(self.proportions) >= 2 else 0.8
+            if choice < wave_start:
+                if choice < wave_start / 2.0:
+                    step_height *= -1
+                terrain_utils.pyramid_stairs_terrain(
+                    terrain,
+                    step_width=0.61,
+                    step_height=0.5 * step_height,
+                    platform_size=3.
+                )
+            else:
+                wave_terrain(terrain, difficulty)
 
         return terrain
 
@@ -167,5 +196,22 @@ def pit_terrain(terrain, depth, platform_size=1.):
     terrain.height_field_raw[x1:x2, y1:y2] = -depth
 
 
+def wave_terrain(terrain, difficulty):
+    """Generate smooth sinusoidal waves with curriculum-controlled severity."""
+    x = np.arange(terrain.length, dtype=np.float32) * terrain.horizontal_scale
+    y = np.arange(terrain.width, dtype=np.float32) * terrain.horizontal_scale
+    xx, yy = np.meshgrid(x, y, indexing="ij")
+
+    # Curriculum: harder terrains get taller and denser waves.
+    amplitude = 0.02 + 0.12 * difficulty
+    wavelength_x = max(3.2 - 1.6 * difficulty, 1.0)
+    wavelength_y = max(2.8 - 1.2 * difficulty, 1.0)
+
+    # Two orthogonal wave components (x/y) form a true cross-wave terrain.
+    phase_shift = np.pi * 0.25
+    wave_x = np.sin(2.0 * np.pi * xx / wavelength_x)
+    wave_y = np.sin(2.0 * np.pi * yy / wavelength_y + phase_shift)
+    height_m = amplitude * (wave_x + wave_y)
+    terrain.height_field_raw[:, :] = np.round(height_m / terrain.vertical_scale).astype(np.int16)
 
 
