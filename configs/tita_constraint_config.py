@@ -64,9 +64,9 @@ class TitaConstraintRoughCfg( LeggedRobotCfg ):
         # PD Drive parameters:
         control_type = 'P'
         stiffness = {'joint': 40}  # [N*m/rad]
-        damping = {'joint': 1.0}     # [N*m*s/rad]
+        damping = {'joint': 1.5}     # [N*m*s/rad]
         # action scale: target angle = actionScale * action + defaultAngle
-        action_scale = 0.5
+        action_scale = 0.35
         # decimation: Number of control action updates @ sim DT per policy DT
         decimation = 4
         hip_scale_reduction = 0.5
@@ -122,11 +122,11 @@ class TitaConstraintRoughCfg( LeggedRobotCfg ):
 
     class domain_rand( LeggedRobotCfg.domain_rand):
         randomize_friction = True
-        friction_range = [0.2, 2.75]
+        friction_range = [0.6, 1.8]
         randomize_restitution = True
         restitution_range = [0.0,1.0]
         randomize_base_mass = True
-        added_mass_range = [-1., 3.]
+        added_mass_range = [-0.5, 1.5]
         randomize_base_com = True
         added_com_range = [-0.1, 0.1]
         push_robots = True
@@ -172,14 +172,14 @@ class TitaConstraintRoughCfg( LeggedRobotCfg ):
     
     class costs:
         class scales:
-            pos_limit = 0.3
-            torque_limit = 0.3
-            dof_vel_limits = 0.3
+            pos_limit = 0.15
+            torque_limit = 0.15
+            dof_vel_limits = 0.15
             # vel_smoothness = 0.1
-            acc_smoothness = 0.1
+            acc_smoothness = 0.05
             #collision = 0.1
-            feet_contact_forces = 0.1
-            stumble = 0.1
+            feet_contact_forces = 0.05
+            stumble = 0.05
         class d_values:
             pos_limit = 0.0
             torque_limit = 0.0
@@ -202,9 +202,9 @@ class TitaConstraintRoughCfg( LeggedRobotCfg ):
 
 class TitaConstraintRoughCfgPPO( LeggedRobotCfgPPO ):
     class algorithm( LeggedRobotCfgPPO.algorithm ):
-        entropy_coef = 0.01
-        learning_rate = 1.e-3
-        max_grad_norm = 0.01
+        entropy_coef = 0.003
+        learning_rate = 3.e-4
+        max_grad_norm = 0.5
         num_learning_epochs = 5
         num_mini_batches = 4 # mini batch size = num_envs*nsteps / nminibatches
         cost_value_loss_coef = 0.1
