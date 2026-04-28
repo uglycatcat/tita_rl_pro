@@ -18,8 +18,8 @@ class Terrain:
         # - "stairs": only pyramid stairs
         # - "wave": only sinusoidal waves
         # - "mixed": keep proportion-based mix (default)
-        self.terrain_mode = getattr(cfg, "terrain_mode", "wave")
-        if self.terrain_mode not in ("stairs", "wave", "mixed"):
+        self.terrain_mode = getattr(cfg, "terrain_mode", "flat")
+        if self.terrain_mode not in ("stairs", "wave", "mixed", "flat"):
             self.terrain_mode = "wave"
         self.proportions = [np.sum(cfg.terrain_proportions[:i+1]) for i in range(len(cfg.terrain_proportions))]
 
@@ -133,6 +133,8 @@ class Terrain:
             )
         elif self.terrain_mode == "wave":
             wave_terrain(terrain, difficulty)
+        elif self.terrain_mode == "flat":
+            flat_terrain(terrain)
         else:
             # Keep stairs as the default terrain and reserve the tail portion
             # for undulating waves so existing training flow is unchanged.
@@ -213,5 +215,10 @@ def wave_terrain(terrain, difficulty):
     wave_y = np.sin(2.0 * np.pi * yy / wavelength_y + phase_shift)
     height_m = amplitude * (wave_x + wave_y)
     terrain.height_field_raw[:, :] = np.round(height_m / terrain.vertical_scale).astype(np.int16)
+
+
+def flat_terrain(terrain):
+    """Generate zero-height flat terrain for Isaac Gym trimesh mode."""
+    terrain.height_field_raw[:, :] = 0
 
 
