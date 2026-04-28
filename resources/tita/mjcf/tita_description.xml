@@ -1,0 +1,139 @@
+<!--
+  该文件是一个MuJoCo XML模型文件，定义了一个双足轮腿机器人模型。
+  该模型包含了机器人的基座和两条腿的关节、质量、惯性等信息。
+  每条腿有三个自由度和一个轮毂电机
+  该文件使用了MuJoCo的XML格式，包含了资产、世界体、关节和电机等元素。
+  -->
+<mujoco>
+  <compiler angle="radian" meshdir="../meshes"/>
+  <option timestep="0.001" gravity="0 0 -9.81"/>
+  <!--添加一些默认设置-->
+  <default>
+    <joint type="hinge" frictionloss="0.1" damping="4"/> <!-- 适度阻尼以抑制震荡 -->
+  </default>
+  <asset>
+    <!-- ========== 材质定义 ========== -->
+    <material name="black" rgba="0.196 0.196 0.196 1"/>
+    <material name="blue" rgba="0.0 0.0 0.8 1"/>
+    <material name="green" rgba="0.0 0.8 0.0 1"/>
+    <material name="grey" rgba="0.3 0.3 0.3 1"/>
+    <material name="yellow" rgba="0.8 0.6 0 1"/>
+    <material name="silver" rgba="0.914 0.914 0.847 1"/>
+    <material name="orange" rgba="1.0 0.424 0.039 1"/>
+    <material name="brown" rgba="0.871 0.812 0.765 1"/>
+    <material name="red" rgba="0.8 0.0 0.0 1"/>
+    <material name="white" rgba="1.0 1.0 1.0 1"/>
+
+    <!-- ========== 网格文件定义 ========== -->
+    <!-- 基座 -->
+    <mesh file="base_link.STL" name="base_link_mesh"/>
+    
+    <!-- 左腿链 -->
+    <mesh file="left_leg_1.STL" name="left_leg_1_mesh"/>
+    <mesh file="left_leg_2.STL" name="left_leg_2_mesh"/>
+    <mesh file="left_leg_3.STL" name="left_leg_3_mesh"/>
+    <mesh file="left_leg_4.STL" name="left_leg_4_mesh"/>
+    
+    <!-- 右腿链 -->
+    <mesh file="right_leg_1.STL" name="right_leg_1_mesh"/>
+    <mesh file="right_leg_2.STL" name="right_leg_2_mesh"/>
+    <mesh file="right_leg_3.STL" name="right_leg_3_mesh"/>
+    <mesh file="right_leg_4.STL" name="right_leg_4_mesh"/>
+
+    <!-- 其他可能的组件 -->
+  </asset>
+
+  <worldbody>
+    <!-- 主基座 -->
+    <body name="base_link" pos="0 0 0.5">
+      <!-- 绑定base_link的imu位置 -->
+      <site name="imu_site" type="box" pos="0 0 0" size="0.02 0.01 0.01" rgba="1 0 0 1"/>
+      <joint name="base_joint" type="free"/>
+      <inertial pos="0.020452 0.0000035457 0.01871" mass="13.2" diaginertia="0.061855 0.036934 0.071232"/>
+      <geom type="mesh" mesh="base_link_mesh" material="yellow"/>
+
+      <!-- 左腿 -->
+      <body name="left_leg_1" pos="0 0.0895 0" quat="0.5 0.5 0.5 0.5">
+        <joint name="joint_left_leg_1" axis="0 0 1" range="-0.785398 0.785398"/>
+        <inertial pos="0.0016025 0.000050253 0.000638" mass="2.064" diaginertia="0.0043044 0.0029982 0.0022703"/>
+        <geom type="mesh" mesh="left_leg_1_mesh" material="grey"/>
+
+        <body name="left_leg_2" pos="0.1426 0 0" quat="0.5 -0.5 0.5 -0.5">
+          <joint name="joint_left_leg_2" axis="0 0 1" range="-1.919862 3.490659"/>
+          <inertial pos="0.021763 0.0019069 -0.027868" mass="3.0984" diaginertia="0.0029784 0.0064836 0.0088353"/>
+          <geom type="mesh" mesh="left_leg_2_mesh" material="black" contype="0" conaffinity="0"/>
+
+          <body name="left_leg_3" pos="0.2 0 0" quat="1 0 0 0">
+            <joint name="joint_left_leg_3" axis="0 0 1" range="-2.670354 -0.698132"/>
+            <inertial pos="0.095348 0.011698 0.001838" mass="0.57244" diaginertia="0.000306 0.003201 0.003421"/>
+            <geom type="mesh" mesh="left_leg_3_mesh" material="silver"/>
+            
+            <body name="left_leg_4" pos="0.2 0 0.0514" quat="1 0 0 0">
+              <joint name="joint_left_leg_4" axis="0 0 1" range="-999999 999999" damping="0.001"/>
+              <inertial pos="-0.000002267 0.0000016471 -0.00095616" mass="1.5094" diaginertia="0.003547 0.003505 0.006905"/>
+              <geom type="mesh" mesh="left_leg_4_mesh" material="brown"/>
+              
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- 右腿 -->
+      <body name="right_leg_1" pos="0 -0.0895 0" quat="0.5 0.5 0.5 0.5">
+        <joint name="joint_right_leg_1" axis="0 0 1" range="-0.785398 0.785398"/>
+        <inertial pos="-0.0016025 0.000050253 0.000638" mass="2.064" diaginertia="0.0043044 0.0029982 0.0022703"/>
+        <geom type="mesh" mesh="right_leg_1_mesh" material="grey"/>
+
+        <body name="right_leg_2" pos="-0.1426 0 0" quat="0.5 -0.5 0.5 -0.5">
+          <joint name="joint_right_leg_2" axis="0 0 1" range="-1.919862 3.490659"/>
+          <inertial pos="0.021763 0.0019065 0.027873" mass="3.0987" diaginertia="0.0029784 0.0064836 0.0088353"/>
+          <geom type="mesh" mesh="right_leg_2_mesh" material="black" contype="0" conaffinity="0"/>
+
+          <body name="right_leg_3" pos="0.2 0 0" quat="1 0 0 0">
+            <joint name="joint_right_leg_3" axis="0 0 1" range="-2.670354 -0.698132"/>
+            <inertial pos="0.095348 0.011698 -0.001838" mass="0.57244" diaginertia="0.000306 0.003201 0.003421"/>
+            <geom type="mesh" mesh="right_leg_3_mesh" material="silver"/>
+            
+            <body name="right_leg_4" pos="0.2 0 -0.0514" quat="1 0 0 0">
+              <joint name="joint_right_leg_4" axis="0 0 1" range="-999999 999999" damping="0.001"/>
+              <inertial pos="-0.0000023798 0.0000015854 0.00095595" mass="1.5094" diaginertia="0.003547 0.003505 0.006905"/>
+              <geom type="mesh" mesh="right_leg_4_mesh" material="brown"/>
+              
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  
+  <!-- 传感器 -->
+  <sensor>
+    <!-- 陀螺仪 -->
+    <gyro name="gyro" site="imu_site" />
+    <!-- 加速度计 -->
+    <accelerometer name="accel" site="imu_site" />
+    <!-- 线速度仪 -->
+    <velocimeter name="velo" site="imu_site" />
+  </sensor>
+
+  <!-- 执行器 -->
+  <actuator>
+    <!-- 左腿 -->
+    <position name="Left_Hip_Roll" joint="joint_left_leg_1" kp="100" ctrllimited="true" ctrlrange="-0.785398 0.785398"/>
+    <position name="Left_Hip_Pitch" joint="joint_left_leg_2" kp="100" ctrllimited="true" ctrlrange="-1.919862 3.490659"/>
+    <position name="Left_Knee_Pitch" joint="joint_left_leg_3" kp="100" ctrllimited="true" ctrlrange="-2.670354 -0.698132"/>
+    <velocity name="Left_Ankle_Wheel" joint="joint_left_leg_4" kv="10" ctrllimited="true" ctrlrange="-20 20"/>
+
+    <!-- 右腿 -->
+    <position name="Right_Hip_Roll" joint="joint_right_leg_1" kp="100" ctrllimited="true" ctrlrange="-0.785398 0.785398"/>
+    <position name="Right_Hip_Pitch" joint="joint_right_leg_2" kp="100" ctrllimited="true" ctrlrange="-1.919862 3.490659"/>
+    <position name="Right_Knee_Pitch" joint="joint_right_leg_3" kp="100" ctrllimited="true" ctrlrange="-2.670354 -0.698132"/>
+    <velocity name="Right_Ankle_Wheel" joint="joint_right_leg_4" kv="10" ctrllimited="true" ctrlrange="-20 20"/>
+  </actuator>
+
+  <!--keyframe关键字表示关键帧，该home关键帧表示初始状态，qpos表示所有关节的角度。ctrl表示可控关节的角度 -->
+  <keyframe>
+    <key name="home" qpos="0 0 0.5 1 0 0 0 0 0 0 0 0 0 0 0" ctrl="0 0 0 0 0 0 0 0"/>
+  </keyframe>
+
+</mujoco>
