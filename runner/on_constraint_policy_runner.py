@@ -132,8 +132,9 @@ class OnConstraintPolicyRunner:
             # # else:
             # #     print("lag is off")
             if self.alg.actor_critic.imi_flag and self.cfg['resume']: 
-                step_size = 1/int(tot_iter/2)
-                imi_weight = max(0.1, 1 - it * step_size)
+                decay_iters = max(1, int(tot_iter * 0.7))
+                step_size = 1 / decay_iters
+                imi_weight = max(0.2, 1 - it * step_size)
                 self.alg.set_imi_weight(imi_weight)
             
             start = time.time()

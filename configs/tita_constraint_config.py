@@ -110,7 +110,7 @@ class TitaConstraintRoughCfg( LeggedRobotCfg ):
             ang_vel_xy = -0.05
             dof_vel = 0.0
             dof_acc = -2.5e-7
-            base_height = -1.0
+            base_height = -1.2
             feet_air_time = 0.0
             collision = -1.0
             feet_stumble = 0.0
@@ -118,7 +118,7 @@ class TitaConstraintRoughCfg( LeggedRobotCfg ):
             action_smoothness= 0
             stand_still = 0.0
             foot_clearance= -0.0
-            orientation=-1.0
+            orientation=-1.2
 
     class domain_rand( LeggedRobotCfg.domain_rand):
         randomize_friction = True
@@ -172,9 +172,9 @@ class TitaConstraintRoughCfg( LeggedRobotCfg ):
     
     class costs:
         class scales:
-            pos_limit = 0.15
+            pos_limit = 0.2
             torque_limit = 0.15
-            dof_vel_limits = 0.15
+            dof_vel_limits = 0.18
             # vel_smoothness = 0.1
             acc_smoothness = 0.05
             #collision = 0.1
@@ -205,10 +205,11 @@ class TitaConstraintRoughCfgPPO( LeggedRobotCfgPPO ):
         entropy_coef = 0.003
         learning_rate = 3.e-4
         max_grad_norm = 0.5
-        num_learning_epochs = 5
+        num_learning_epochs = 4
         num_mini_batches = 4 # mini batch size = num_envs*nsteps / nminibatches
         cost_value_loss_coef = 0.1
-        cost_viol_loss_coef = 0.1
+        cost_viol_loss_coef = 0.15
+        desired_kl = 0.005
 
     class policy( LeggedRobotCfgPPO.policy):
         init_noise_std = 1.0
