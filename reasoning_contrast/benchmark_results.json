@@ -1,0 +1,566 @@
+{
+  "metadata": {
+    "timestamp": "2026-04-27T03:42:10.011735",
+    "torch_version": "2.3.1",
+    "cuda_available": true,
+    "torch_cuda_version": "12.1",
+    "device": "cuda:0",
+    "gpu_name": "NVIDIA GeForce RTX 3080 Ti",
+    "gpu_capability": [
+      8,
+      6
+    ],
+    "driver_version": "570.153.02"
+  },
+  "config": {
+    "batch_size": 1,
+    "warmup": 100,
+    "iters": 1000,
+    "repeats": 3,
+    "seed": 42,
+    "device": "cuda:0",
+    "nvidia_smi_interval_ms": 100,
+    "resource_sampling_window": "measured_iterations_only"
+  },
+  "input_spec": {
+    "obs_prop_shape": [
+      1,
+      33
+    ],
+    "obs_hist_shape": [
+      1,
+      10,
+      33
+    ],
+    "num_actions": 8,
+    "num_obs": 586
+  },
+  "baseline_backend": "pytorch_checkpoint",
+  "backends": {
+    "pytorch_checkpoint": {
+      "status": "ok",
+      "repeats": [
+        {
+          "duration_s": 0.912733692999609,
+          "throughput_qps": 1095.609823182487,
+          "latency": {
+            "mean_ms": 0.6442057300300803,
+            "p50_ms": 0.5691554997611092,
+            "p90_ms": 0.6548325991388994,
+            "p99_ms": 1.0801434388304187,
+            "std_ms": 0.5350414137989633,
+            "min_ms": 0.5247110002528643,
+            "max_ms": 8.111098000881611
+          },
+          "resource": {
+            "samples": 7,
+            "gpu_util_mean": 6.714285714285714,
+            "gpu_util_peak": 8.0,
+            "memory_used_mean_mb": 348.0,
+            "memory_used_peak_mb": 348.0,
+            "power_mean_w": 51.87857142857143,
+            "power_peak_w": 86.98
+          },
+          "torch_memory_mb": {
+            "allocated_peak_mb": 13.30712890625,
+            "reserved_peak_mb": 38.0,
+            "allocated_mean_mb": 12.287109375,
+            "reserved_mean_mb": 38.0
+          }
+        },
+        {
+          "duration_s": 0.8799274900011369,
+          "throughput_qps": 1136.4572778590064,
+          "latency": {
+            "mean_ms": 0.6200356650151662,
+            "p50_ms": 0.5609989993899944,
+            "p90_ms": 0.5956766000963398,
+            "p99_ms": 1.1356024100314244,
+            "std_ms": 0.563173965950068,
+            "min_ms": 0.5344829987734556,
+            "max_ms": 8.26822999988508
+          },
+          "resource": {
+            "samples": 7,
+            "gpu_util_mean": 6.142857142857143,
+            "gpu_util_peak": 7.0,
+            "memory_used_mean_mb": 348.0,
+            "memory_used_peak_mb": 348.0,
+            "power_mean_w": 89.27285714285713,
+            "power_peak_w": 89.31
+          },
+          "torch_memory_mb": {
+            "allocated_peak_mb": 13.30712890625,
+            "reserved_peak_mb": 38.0,
+            "allocated_mean_mb": 12.287109375,
+            "reserved_mean_mb": 38.0
+          }
+        },
+        {
+          "duration_s": 0.89264557199931,
+          "throughput_qps": 1120.2654573866782,
+          "latency": {
+            "mean_ms": 0.6306115120351024,
+            "p50_ms": 0.5670079999617883,
+            "p90_ms": 0.6608302008316969,
+            "p99_ms": 0.9610734809211859,
+            "std_ms": 0.5174849842617196,
+            "min_ms": 0.5339359995559789,
+            "max_ms": 7.215859999632812
+          },
+          "resource": {
+            "samples": 7,
+            "gpu_util_mean": 5.857142857142857,
+            "gpu_util_peak": 7.0,
+            "memory_used_mean_mb": 348.0,
+            "memory_used_peak_mb": 348.0,
+            "power_mean_w": 89.39428571428572,
+            "power_peak_w": 89.5
+          },
+          "torch_memory_mb": {
+            "allocated_peak_mb": 13.30712890625,
+            "reserved_peak_mb": 38.0,
+            "allocated_mean_mb": 12.287109375,
+            "reserved_mean_mb": 38.0
+          }
+        }
+      ],
+      "aggregate": {
+        "repeats": 3,
+        "mean_latency_ms": 0.6316176356934496,
+        "p50_latency_ms": 0.5657208330376307,
+        "p90_latency_ms": 0.6371131333556453,
+        "p99_latency_ms": 1.058939776594343,
+        "std_latency_ms": 0.5385667880035836,
+        "throughput_qps": 1117.444186142724,
+        "gpu_util_mean": 6.238095238095238,
+        "gpu_util_peak": 7.333333333333333,
+        "memory_used_mean_mb": 348.0,
+        "memory_used_peak_mb": 348.0,
+        "power_mean_w": 76.84857142857142,
+        "power_peak_w": 88.59666666666668,
+        "torch_allocated_peak_mb": 13.30712890625,
+        "torch_reserved_peak_mb": 38.0
+      },
+      "accuracy_vs_baseline": {
+        "available": true,
+        "max_abs_error": 0.0,
+        "mean_abs_error": 0.0,
+        "cosine_similarity": 1.0
+      }
+    },
+    "torchscript_jit": {
+      "status": "ok",
+      "repeats": [
+        {
+          "duration_s": 0.7335665470000095,
+          "throughput_qps": 1363.2028397281688,
+          "latency": {
+            "mean_ms": 0.4709092970351776,
+            "p50_ms": 0.4265255010977853,
+            "p90_ms": 0.4618023007424199,
+            "p99_ms": 0.8489151003959704,
+            "std_ms": 0.42418675860369376,
+            "min_ms": 0.40310499935003463,
+            "max_ms": 6.5626800005702535
+          },
+          "resource": {
+            "samples": 6,
+            "gpu_util_mean": 7.5,
+            "gpu_util_peak": 9.0,
+            "memory_used_mean_mb": 348.0,
+            "memory_used_peak_mb": 348.0,
+            "power_mean_w": 89.47000000000001,
+            "power_peak_w": 89.49
+          },
+          "torch_memory_mb": {
+            "allocated_peak_mb": 11.37353515625,
+            "reserved_peak_mb": 38.0,
+            "allocated_mean_mb": 10.353515625,
+            "reserved_mean_mb": 38.0
+          }
+        },
+        {
+          "duration_s": 0.7414361970004393,
+          "throughput_qps": 1348.7337198340313,
+          "latency": {
+            "mean_ms": 0.47408287202051724,
+            "p50_ms": 0.4341060002843733,
+            "p90_ms": 0.46660579973831773,
+            "p99_ms": 0.6868141602171813,
+            "std_ms": 0.41925374973763896,
+            "min_ms": 0.40798000009090174,
+            "max_ms": 5.98816199999419
+          },
+          "resource": {
+            "samples": 6,
+            "gpu_util_mean": 7.333333333333333,
+            "gpu_util_peak": 8.0,
+            "memory_used_mean_mb": 348.0,
+            "memory_used_peak_mb": 348.0,
+            "power_mean_w": 89.47166666666668,
+            "power_peak_w": 89.51
+          },
+          "torch_memory_mb": {
+            "allocated_peak_mb": 11.37353515625,
+            "reserved_peak_mb": 38.0,
+            "allocated_mean_mb": 10.353515625,
+            "reserved_mean_mb": 38.0
+          }
+        },
+        {
+          "duration_s": 0.7415988560005644,
+          "throughput_qps": 1348.4378945687572,
+          "latency": {
+            "mean_ms": 0.47532444801254314,
+            "p50_ms": 0.4361655001048348,
+            "p90_ms": 0.46591110058216145,
+            "p99_ms": 0.7097269001133099,
+            "std_ms": 0.43003476475932817,
+            "min_ms": 0.40819899913913105,
+            "max_ms": 6.2286780012072995
+          },
+          "resource": {
+            "samples": 6,
+            "gpu_util_mean": 7.666666666666667,
+            "gpu_util_peak": 8.0,
+            "memory_used_mean_mb": 348.0,
+            "memory_used_peak_mb": 348.0,
+            "power_mean_w": 89.55666666666667,
+            "power_peak_w": 89.65
+          },
+          "torch_memory_mb": {
+            "allocated_peak_mb": 11.37353515625,
+            "reserved_peak_mb": 38.0,
+            "allocated_mean_mb": 10.353515625,
+            "reserved_mean_mb": 38.0
+          }
+        }
+      ],
+      "aggregate": {
+        "repeats": 3,
+        "mean_latency_ms": 0.47343887235607934,
+        "p50_latency_ms": 0.4322656671623311,
+        "p90_latency_ms": 0.4647730670209664,
+        "p99_latency_ms": 0.7484853869088206,
+        "std_latency_ms": 0.4244917577002203,
+        "throughput_qps": 1353.4581513769858,
+        "gpu_util_mean": 7.5,
+        "gpu_util_peak": 8.333333333333334,
+        "memory_used_mean_mb": 348.0,
+        "memory_used_peak_mb": 348.0,
+        "power_mean_w": 89.49944444444445,
+        "power_peak_w": 89.55,
+        "torch_allocated_peak_mb": 11.37353515625,
+        "torch_reserved_peak_mb": 38.0
+      },
+      "accuracy_vs_baseline": {
+        "available": true,
+        "max_abs_error": 0.0,
+        "mean_abs_error": 0.0,
+        "cosine_similarity": 1.0
+      }
+    },
+    "onnxruntime": {
+      "status": "ok",
+      "repeats": [
+        {
+          "duration_s": 0.3085682349992567,
+          "throughput_qps": 3240.774281262,
+          "latency": {
+            "mean_ms": 0.3060302440171654,
+            "p50_ms": 0.280263499917055,
+            "p90_ms": 0.32514789872948313,
+            "p99_ms": 0.3865758296524291,
+            "std_ms": 0.3001681171096595,
+            "min_ms": 0.24825899890856817,
+            "max_ms": 5.847251000886899
+          },
+          "resource": {
+            "samples": 3,
+            "gpu_util_mean": 24.666666666666668,
+            "gpu_util_peak": 35.0,
+            "memory_used_mean_mb": 370.0,
+            "memory_used_peak_mb": 370.0,
+            "power_mean_w": 89.96666666666665,
+            "power_peak_w": 90.39
+          }
+        },
+        {
+          "duration_s": 0.3446569379993889,
+          "throughput_qps": 2901.4358620042435,
+          "latency": {
+            "mean_ms": 0.34228741394872486,
+            "p50_ms": 0.3155345002596732,
+            "p90_ms": 0.3863101001115865,
+            "p99_ms": 0.5343386195636408,
+            "std_ms": 0.32926514796610296,
+            "min_ms": 0.2459130009810906,
+            "max_ms": 6.073770999137196
+          },
+          "resource": {
+            "samples": 3,
+            "gpu_util_mean": 22.666666666666668,
+            "gpu_util_peak": 32.0,
+            "memory_used_mean_mb": 370.0,
+            "memory_used_peak_mb": 370.0,
+            "power_mean_w": 90.69333333333334,
+            "power_peak_w": 90.97
+          }
+        },
+        {
+          "duration_s": 0.300088436999431,
+          "throughput_qps": 3332.350989591432,
+          "latency": {
+            "mean_ms": 0.2979111900058342,
+            "p50_ms": 0.2700570012166281,
+            "p90_ms": 0.2990397997564287,
+            "p99_ms": 0.43067786051324203,
+            "std_ms": 0.3244490905900691,
+            "min_ms": 0.24415200095972978,
+            "max_ms": 6.4307529992220225
+          },
+          "resource": {
+            "samples": 3,
+            "gpu_util_mean": 31.0,
+            "gpu_util_peak": 37.0,
+            "memory_used_mean_mb": 370.0,
+            "memory_used_peak_mb": 370.0,
+            "power_mean_w": 91.47333333333334,
+            "power_peak_w": 91.76
+          }
+        }
+      ],
+      "aggregate": {
+        "repeats": 3,
+        "mean_latency_ms": 0.3154096159905748,
+        "p50_latency_ms": 0.28861833379778545,
+        "p90_latency_ms": 0.33683259953249944,
+        "p99_latency_ms": 0.45053076990977065,
+        "std_latency_ms": 0.3179607852219439,
+        "throughput_qps": 3158.187044285892,
+        "gpu_util_mean": 26.111111111111114,
+        "gpu_util_peak": 34.666666666666664,
+        "memory_used_mean_mb": 370.0,
+        "memory_used_peak_mb": 370.0,
+        "power_mean_w": 90.71111111111111,
+        "power_peak_w": 91.04,
+        "torch_allocated_peak_mb": null,
+        "torch_reserved_peak_mb": null
+      },
+      "accuracy_vs_baseline": {
+        "available": true,
+        "max_abs_error": 9.5367431640625e-07,
+        "mean_abs_error": 3.203749656677246e-07,
+        "cosine_similarity": 0.9999999999999738
+      },
+      "notes": {
+        "available_providers": [
+          "TensorrtExecutionProvider",
+          "CUDAExecutionProvider",
+          "CPUExecutionProvider"
+        ],
+        "requested_providers": [
+          "CUDAExecutionProvider",
+          "CPUExecutionProvider"
+        ],
+        "active_providers": [
+          "CUDAExecutionProvider",
+          "CPUExecutionProvider"
+        ]
+      }
+    },
+    "tensorrt_fp32": {
+      "status": "ok",
+      "repeats": [
+        {
+          "duration_s": 0.47094464099973266,
+          "throughput_qps": 11772.1,
+          "latency": {
+            "mean_ms": 0.08494661105495196,
+            "p50_ms": 0.08494661105495196,
+            "p90_ms": null,
+            "p99_ms": 0.08494661105495196,
+            "std_ms": null,
+            "min_ms": 0.08494661105495196,
+            "max_ms": 0.08494661105495196
+          },
+          "resource": {
+            "samples": 4,
+            "gpu_util_mean": 9.25,
+            "gpu_util_peak": 25.0,
+            "memory_used_mean_mb": 550.75,
+            "memory_used_peak_mb": 641.0,
+            "power_mean_w": 91.3725,
+            "power_peak_w": 91.76
+          },
+          "raw_exit_code": 0
+        },
+        {
+          "duration_s": 0.43511847500121803,
+          "throughput_qps": 15351.1,
+          "latency": {
+            "mean_ms": 0.06514191165453942,
+            "p50_ms": 0.06514191165453942,
+            "p90_ms": null,
+            "p99_ms": 0.06514191165453942,
+            "std_ms": null,
+            "min_ms": 0.06514191165453942,
+            "max_ms": 0.06514191165453942
+          },
+          "resource": {
+            "samples": 4,
+            "gpu_util_mean": 18.75,
+            "gpu_util_peak": 36.0,
+            "memory_used_mean_mb": 491.0,
+            "memory_used_peak_mb": 641.0,
+            "power_mean_w": 91.5925,
+            "power_peak_w": 91.79
+          },
+          "raw_exit_code": 0
+        },
+        {
+          "duration_s": 0.42996821099950466,
+          "throughput_qps": 19440.3,
+          "latency": {
+            "mean_ms": 0.051439535398116285,
+            "p50_ms": 0.051439535398116285,
+            "p90_ms": null,
+            "p99_ms": 0.051439535398116285,
+            "std_ms": null,
+            "min_ms": 0.051439535398116285,
+            "max_ms": 0.051439535398116285
+          },
+          "resource": {
+            "samples": 4,
+            "gpu_util_mean": 8.25,
+            "gpu_util_peak": 25.0,
+            "memory_used_mean_mb": 487.5,
+            "memory_used_peak_mb": 641.0,
+            "power_mean_w": 91.775,
+            "power_peak_w": 91.84
+          },
+          "raw_exit_code": 0
+        }
+      ],
+      "aggregate": {
+        "repeats": 3,
+        "mean_latency_ms": 0.06717601936920255,
+        "p50_latency_ms": 0.06717601936920255,
+        "p90_latency_ms": null,
+        "p99_latency_ms": 0.06717601936920255,
+        "std_latency_ms": null,
+        "throughput_qps": 15521.166666666666,
+        "gpu_util_mean": 12.083333333333334,
+        "gpu_util_peak": 28.666666666666668,
+        "memory_used_mean_mb": 509.75,
+        "memory_used_peak_mb": 641.0,
+        "power_mean_w": 91.58,
+        "power_peak_w": 91.79666666666667,
+        "torch_allocated_peak_mb": null,
+        "torch_reserved_peak_mb": null
+      },
+      "accuracy_vs_baseline": {
+        "available": false,
+        "reason": "trtexec_mode_no_output_tensor"
+      },
+      "notes": "TensorRT benchmark uses trtexec --loadEngine fallback."
+    },
+    "tensorrt_fp16": {
+      "status": "ok",
+      "repeats": [
+        {
+          "duration_s": 0.4788195410001208,
+          "throughput_qps": 21976.3,
+          "latency": {
+            "mean_ms": 0.04550356520433376,
+            "p50_ms": 0.04550356520433376,
+            "p90_ms": null,
+            "p99_ms": 0.04550356520433376,
+            "std_ms": null,
+            "min_ms": 0.04550356520433376,
+            "max_ms": 0.04550356520433376
+          },
+          "resource": {
+            "samples": 4,
+            "gpu_util_mean": 8.5,
+            "gpu_util_peak": 17.0,
+            "memory_used_mean_mb": 491.0,
+            "memory_used_peak_mb": 641.0,
+            "power_mean_w": 91.6775,
+            "power_peak_w": 91.87
+          },
+          "raw_exit_code": 0
+        },
+        {
+          "duration_s": 0.45313490399894363,
+          "throughput_qps": 19215.7,
+          "latency": {
+            "mean_ms": 0.0520407791545455,
+            "p50_ms": 0.0520407791545455,
+            "p90_ms": null,
+            "p99_ms": 0.0520407791545455,
+            "std_ms": null,
+            "min_ms": 0.0520407791545455,
+            "max_ms": 0.0520407791545455
+          },
+          "resource": {
+            "samples": 4,
+            "gpu_util_mean": 20.25,
+            "gpu_util_peak": 51.0,
+            "memory_used_mean_mb": 487.5,
+            "memory_used_peak_mb": 641.0,
+            "power_mean_w": 91.795,
+            "power_peak_w": 92.02
+          },
+          "raw_exit_code": 0
+        },
+        {
+          "duration_s": 0.43039914700057125,
+          "throughput_qps": 20538.0,
+          "latency": {
+            "mean_ms": 0.04869023273931249,
+            "p50_ms": 0.04869023273931249,
+            "p90_ms": null,
+            "p99_ms": 0.04869023273931249,
+            "std_ms": null,
+            "min_ms": 0.04869023273931249,
+            "max_ms": 0.04869023273931249
+          },
+          "resource": {
+            "samples": 4,
+            "gpu_util_mean": 8.5,
+            "gpu_util_peak": 29.0,
+            "memory_used_mean_mb": 487.5,
+            "memory_used_peak_mb": 641.0,
+            "power_mean_w": 91.94250000000001,
+            "power_peak_w": 92.01
+          },
+          "raw_exit_code": 0
+        }
+      ],
+      "aggregate": {
+        "repeats": 3,
+        "mean_latency_ms": 0.04874485903273059,
+        "p50_latency_ms": 0.04874485903273059,
+        "p90_latency_ms": null,
+        "p99_latency_ms": 0.04874485903273059,
+        "std_latency_ms": null,
+        "throughput_qps": 20576.666666666668,
+        "gpu_util_mean": 12.416666666666666,
+        "gpu_util_peak": 32.333333333333336,
+        "memory_used_mean_mb": 488.6666666666667,
+        "memory_used_peak_mb": 641.0,
+        "power_mean_w": 91.805,
+        "power_peak_w": 91.96666666666665,
+        "torch_allocated_peak_mb": null,
+        "torch_reserved_peak_mb": null
+      },
+      "accuracy_vs_baseline": {
+        "available": false,
+        "reason": "trtexec_mode_no_output_tensor"
+      },
+      "notes": "TensorRT benchmark uses trtexec --loadEngine fallback."
+    }
+  }
+}

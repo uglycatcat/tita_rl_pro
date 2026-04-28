@@ -22,13 +22,17 @@ from typing import Any, Dict, List, Optional, Tuple
 import numpy as np
 import torch
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 from configs.tita_constraint_config import TitaConstraintRoughCfg, TitaConstraintRoughCfgPPO
 
 
 def _load_actor_critic_barlow_twins() -> Any:
     """Load ActorCriticBarlowTwins without importing modules/__init__.py."""
-    project_root = Path(__file__).resolve().parent
-    modules_dir = project_root / "modules"
+    modules_dir = PROJECT_ROOT / "modules"
     package_name = "modules"
 
     package = sys.modules.get(package_name)
@@ -612,6 +616,9 @@ def _run_backend_repeats(
 
 
 def _write_json(path: str, data: Dict[str, Any]) -> None:
+    directory = os.path.dirname(path)
+    if directory:
+        os.makedirs(directory, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
@@ -619,6 +626,9 @@ def _write_json(path: str, data: Dict[str, Any]) -> None:
 def _write_csv(path: str, rows: List[Dict[str, Any]]) -> None:
     if not rows:
         return
+    directory = os.path.dirname(path)
+    if directory:
+        os.makedirs(directory, exist_ok=True)
     keys = ["backend", "repeat", "iter", "latency_ms", "source"]
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=keys)
@@ -628,6 +638,9 @@ def _write_csv(path: str, rows: List[Dict[str, Any]]) -> None:
 
 
 def _write_markdown(path: str, payload: Dict[str, Any]) -> None:
+    directory = os.path.dirname(path)
+    if directory:
+        os.makedirs(directory, exist_ok=True)
     lines: List[str] = []
     lines.append("# Inference Benchmark Report")
     lines.append("")
@@ -679,6 +692,27 @@ def _write_markdown(path: str, payload: Dict[str, Any]) -> None:
         f.write("\n".join(lines) + "\n")
 
 
+def _resolve_input_path(raw_path: str) -> str:
+    candidate = Path(raw_path)
+    if candidate.is_absolute():
+        return str(candidate)
+    cwd_candidate = Path.cwd() / candidate
+    if cwd_candidate.exists():
+        return str(cwd_candidate)
+    project_candidate = PROJECT_ROOT / candidate
+    if project_candidate.exists():
+        return str(project_candidate)
+    script_candidate = SCRIPT_DIR / candidate
+    return str(script_candidate)
+
+
+def _resolve_output_path(raw_path: str) -> str:
+    candidate = Path(raw_path)
+    if candidate.is_absolute():
+        return str(candidate)
+    return str(SCRIPT_DIR / candidate)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Inference benchmark across PT/JIT/ONNX/TRT")
     parser.add_argument("--device", default="cuda:0", help="Torch device, e.g. cuda:0 or cpu")
@@ -693,15 +727,23 @@ def main() -> None:
     parser.add_argument("--engine-fp32", default="test_fp32.engine")
     parser.add_argument("--engine-fp16", default="test_fp16.engine")
     parser.add_argument("--nvidia-smi-interval-ms", type=int, default=100)
-    parser.add_argument("--output-json", default="benchmark_results.json")
-    parser.add_argument("--output-md", default="benchmark_results.md")
-    parser.add_argument("--output-csv", default="benchmark_samples.csv")
+    parser.add_argument("--output-json", default=str(SCRIPT_DIR / "benchmark_results.json"))
+    parser.add_argument("--output-md", default=str(SCRIPT_DIR / "benchmark_results.md"))
+    parser.add_argument("--output-csv", default=str(SCRIPT_DIR / "benchmark_samples.csv"))
     parser.add_argument(
         "--disable-resource-sampling",
         action="store_true",
         help="Disable nvidia-smi GPU util/memory/power sampling",
     )
     args = parser.parse_args()
+    args.checkpoint = _resolve_input_path(args.checkpoint)
+    args.torchscript = _resolve_input_path(args.torchscript)
+    args.onnx = _resolve_input_path(args.onnx)
+    args.engine_fp32 = _resolve_input_path(args.engine_fp32)
+    args.engine_fp16 = _resolve_input_path(args.engine_fp16)
+    args.output_json = _resolve_output_path(args.output_json)
+    args.output_md = _resolve_output_path(args.output_md)
+    args.output_csv = _resolve_output_path(args.output_csv)
 
     if args.device.startswith("cuda") and not torch.cuda.is_available():
         raise RuntimeError("CUDA device requested but torch.cuda.is_available() is False")

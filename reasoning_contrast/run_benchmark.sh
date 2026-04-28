@@ -14,21 +14,23 @@ REPEATS="${REPEATS:-3}"
 SEED="${SEED:-42}"
 NVSMI_MS="${NVSMI_MS:-100}"
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 CHECKPOINT="${CHECKPOINT:-model_stairs_10000.pt}"
 TORCHSCRIPT="${TORCHSCRIPT:-model.pt}"
 ONNX_MODEL="${ONNX_MODEL:-test.onnx}"
 ENGINE_FP32="${ENGINE_FP32:-test_fp32.engine}"
 ENGINE_FP16="${ENGINE_FP16:-test_fp16.engine}"
 
-OUT_JSON="${OUT_JSON:-benchmark_results.json}"
-OUT_MD="${OUT_MD:-benchmark_results.md}"
-OUT_CSV="${OUT_CSV:-benchmark_samples.csv}"
+OUT_JSON="${OUT_JSON:-${SCRIPT_DIR}/benchmark_results.json}"
+OUT_MD="${OUT_MD:-${SCRIPT_DIR}/benchmark_results.md}"
+OUT_CSV="${OUT_CSV:-${SCRIPT_DIR}/benchmark_samples.csv}"
 
 echo "[benchmark] device=${DEVICE}, batch=${BATCH_SIZE}, warmup=${WARMUP}, iters=${ITERS}, repeats=${REPEATS}"
 echo "[benchmark] models: ckpt=${CHECKPOINT}, jit=${TORCHSCRIPT}, onnx=${ONNX_MODEL}"
 echo "[benchmark] engines: fp32=${ENGINE_FP32}, fp16=${ENGINE_FP16}"
 
-python "benchmark_inference.py" \
+python "${SCRIPT_DIR}/benchmark_inference.py" \
   --device "${DEVICE}" \
   --batch-size "${BATCH_SIZE}" \
   --warmup "${WARMUP}" \
