@@ -1,0 +1,14 @@
+{
+  "engine": "mujoco",
+  "scenario_id": "flat_forward",
+  "repeat_id": 0,
+  "seed": 0,
+  "rows": 2000,
+  "sim_time_s": 20.00000000000146,
+  "wall_time_s": 1.6183670279988291,
+  "avg_infer_ms": 0.14080891301273368,
+  "headless": true,
+  "realtime": false,
+  "output_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/dynamics_rand/flat_forward_r0.csv",
+  "terminated_early": false
+}

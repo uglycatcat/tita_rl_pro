@@ -1,0 +1,14 @@
+{
+  "engine": "mujoco",
+  "scenario_id": "constant_forward",
+  "repeat_id": 0,
+  "seed": 0,
+  "rows": 2000,
+  "sim_time_s": 20.00000000000146,
+  "wall_time_s": 1.5550310029975662,
+  "avg_infer_ms": 0.11975022106707911,
+  "headless": true,
+  "realtime": false,
+  "output_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/mujoco_vs_phyX/mujoco/constant_forward_r0.csv",
+  "terminated_early": false
+}

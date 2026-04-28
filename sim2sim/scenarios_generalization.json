@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "description": "MuJoCo generalization across flat, stairs, slope",
+  "scenarios": [
+    {
+      "scenario_id": "flat_forward",
+      "scene_xml": "resources/tita/mjcf/flat_scene.xml",
+      "sim_time_s": 20.0,
+      "command_type": "constant",
+      "cmd_vx": 1.0,
+      "cmd_yaw": 0.0
+    },
+    {
+      "scenario_id": "stairs_forward",
+      "scene_xml": "resources/tita/mjcf/stairs_scene.xml",
+      "sim_time_s": 20.0,
+      "command_type": "constant",
+      "cmd_vx": 1.0,
+      "cmd_yaw": 0.0
+    },
+    {
+      "scenario_id": "slope_forward",
+      "scene_xml": "resources/tita/mjcf/slope_scene.xml",
+      "sim_time_s": 20.0,
+      "command_type": "constant",
+      "cmd_vx": 1.0,
+      "cmd_yaw": 0.0
+    }
+  ]
+}

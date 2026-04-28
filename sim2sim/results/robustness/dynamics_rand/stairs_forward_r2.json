@@ -1,0 +1,14 @@
+{
+  "engine": "mujoco",
+  "scenario_id": "stairs_forward",
+  "repeat_id": 2,
+  "seed": 2,
+  "rows": 419,
+  "sim_time_s": 4.189999999999734,
+  "wall_time_s": 0.3456297459997586,
+  "avg_infer_ms": 0.14030697372980802,
+  "headless": true,
+  "realtime": false,
+  "output_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/dynamics_rand/stairs_forward_r2.csv",
+  "terminated_early": true
+}

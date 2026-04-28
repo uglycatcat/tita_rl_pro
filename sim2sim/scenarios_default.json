@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "description": "Default PhysX-MuJoCo comparison scenarios",
+  "scenarios": [
+    {
+      "scenario_id": "constant_forward",
+      "sim_time_s": 20.0,
+      "command_type": "constant",
+      "cmd_vx": 1.0,
+      "cmd_yaw": 0.0
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "engine": "physx",
+  "scenario_id": "constant_forward",
+  "repeat_id": 0,
+  "seed": 0,
+  "rows": 2000,
+  "sim_time_s": 19.999999552965164,
+  "onnx_path": "/home/ubuntu/tita_rl_pro/sim2sim/stairs_test.onnx",
+  "output_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/mujoco_vs_phyX/physx/constant_forward_r0.csv",
+  "terminated_early": false
+}

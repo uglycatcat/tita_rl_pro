@@ -1,0 +1,14 @@
+{
+  "engine": "mujoco",
+  "scenario_id": "slope_forward",
+  "repeat_id": 0,
+  "seed": 0,
+  "rows": 1798,
+  "sim_time_s": 17.97999999999899,
+  "wall_time_s": 1.4366814879995218,
+  "avg_infer_ms": 0.13278974529587204,
+  "headless": true,
+  "realtime": false,
+  "output_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/terrain_contrast/mujoco/slope_forward_r0.csv",
+  "terminated_early": true
+}

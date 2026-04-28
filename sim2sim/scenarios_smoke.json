@@ -1,0 +1,1 @@
+{"scenarios": [{"scenario_id": "smoke", "sim_time_s": 0.2, "command_type": "constant", "cmd_vx": 0.5, "cmd_yaw": 0.0}]}

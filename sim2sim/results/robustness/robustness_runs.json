@@ -1,0 +1,83 @@
+{
+  "rand_level": "medium",
+  "ranges": {
+    "friction": [
+      0.8,
+      1.2
+    ],
+    "mass": [
+      0.9,
+      1.1
+    ],
+    "com": [
+      0.01,
+      0.01,
+      0.01
+    ]
+  },
+  "records": [
+    {
+      "scenario_id": "flat_forward",
+      "repeat_id": 0,
+      "seed": 0,
+      "baseline_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/baseline/flat_forward_r0.csv",
+      "rand_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/dynamics_rand/flat_forward_r0.csv"
+    },
+    {
+      "scenario_id": "stairs_forward",
+      "repeat_id": 0,
+      "seed": 0,
+      "baseline_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/baseline/stairs_forward_r0.csv",
+      "rand_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/dynamics_rand/stairs_forward_r0.csv"
+    },
+    {
+      "scenario_id": "slope_forward",
+      "repeat_id": 0,
+      "seed": 0,
+      "baseline_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/baseline/slope_forward_r0.csv",
+      "rand_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/dynamics_rand/slope_forward_r0.csv"
+    },
+    {
+      "scenario_id": "flat_forward",
+      "repeat_id": 1,
+      "seed": 1,
+      "baseline_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/baseline/flat_forward_r1.csv",
+      "rand_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/dynamics_rand/flat_forward_r1.csv"
+    },
+    {
+      "scenario_id": "stairs_forward",
+      "repeat_id": 1,
+      "seed": 1,
+      "baseline_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/baseline/stairs_forward_r1.csv",
+      "rand_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/dynamics_rand/stairs_forward_r1.csv"
+    },
+    {
+      "scenario_id": "slope_forward",
+      "repeat_id": 1,
+      "seed": 1,
+      "baseline_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/baseline/slope_forward_r1.csv",
+      "rand_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/dynamics_rand/slope_forward_r1.csv"
+    },
+    {
+      "scenario_id": "flat_forward",
+      "repeat_id": 2,
+      "seed": 2,
+      "baseline_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/baseline/flat_forward_r2.csv",
+      "rand_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/dynamics_rand/flat_forward_r2.csv"
+    },
+    {
+      "scenario_id": "stairs_forward",
+      "repeat_id": 2,
+      "seed": 2,
+      "baseline_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/baseline/stairs_forward_r2.csv",
+      "rand_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/dynamics_rand/stairs_forward_r2.csv"
+    },
+    {
+      "scenario_id": "slope_forward",
+      "repeat_id": 2,
+      "seed": 2,
+      "baseline_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/baseline/slope_forward_r2.csv",
+      "rand_csv": "/home/ubuntu/tita_rl_pro/sim2sim/results/robustness/dynamics_rand/slope_forward_r2.csv"
+    }
+  ]
+}
