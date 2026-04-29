@@ -1,0 +1,6 @@
+模块,关键配置,说明
+并行采样,num_envs=4096,保证多地形样本吞吐，降低单环境随机性影响
+采样长度,num_steps_per_env=24,与第三章一致，保证可比性
+优化器设置,learning_rate=3e-4、max_grad_norm=0.5,控制更新强度，避免过冲
+探索设置,entropy_coef=0.003、可学习噪声,平衡探索与收敛速度
+约束通道,num_costs=6 + costs.scales,显式建模关节与接触风险

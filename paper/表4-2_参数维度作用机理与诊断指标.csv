@@ -1,0 +1,6 @@
+调参维度,代表参数/机制,作用机理,诊断指标
+优化强度,learning_rate、max_grad_norm,控制策略更新步长，抑制价值/策略过冲,Loss/learning_rate、Loss/surrogate
+探索强度,entropy_coef、动作噪声调度,平衡新策略探索与旧策略保持,Policy/mean_noise_std
+模仿调度,imi_flag 与模仿损失调度,约束策略偏离，降低中后期漂移,Loss/mean_imitation_loss
+约束强度,costs.scales、num_costs=6,明确不同风险通道压制优先级,Episode/cost_pos_limit、cost_dof_vel_limits、cost_stumble
+随机化强度,domain_rand（摩擦、质量、质心、推扰、执行器、时延）,提升泛化并逼近部署扰动分布,收敛速度、终止率、约束波动
